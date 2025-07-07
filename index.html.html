@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalNews - Your Trusted Local News Source</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0056b3;
+            --secondary: #e63946;
+            --accent: #ffc107;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background-color: var(--dark);
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-time {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+
+        .main-header {
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--accent);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 300px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-bar button {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-bar button:hover {
+            background: #ffd54f;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-menu li {
+            position: relative;
+        }
+
+        .main-menu a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .main-menu a:hover, 
+        .main-menu a.active {
+            color: var(--primary);
+            background-color: #f0f7ff;
+        }
+
+        .main-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 30px 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixlib=rb-4.0.3') center/cover;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            padding: 40px 0;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #c1121f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Breaking News */
+        .breaking-news {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 0;
+            margin-bottom: 25px;
+        }
+
+        .breaking-news-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .breaking-label {
+            background: var(--dark);
+            padding: 5px 15px;
+            font-weight: 700;
+            margin-right: 20px;
+            border-radius: 3px;
+        }
+
+        .news-ticker {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 24px;
+        }
+
+        .ticker-content {
+            position: absolute;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* News Section */
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .news-card:hover .news-img img {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .news-title a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .news-title a:hover {
+            color: var(--primary);
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .news-meta i {
+            margin-right: 5px;
+        }
+
+        .news-meta span {
+            margin-right: 15px;
+        }
+
+        /* Featured News */
+        .featured-news {
+            margin-bottom: 40px;
+        }
+
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .featured-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-img {
+            height: 100%;
+        }
+
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-category {
+            background: var(--accent);
+            color: var(--dark);
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .featured-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .featured-excerpt {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            color: var(--dark);
+        }
+
+        .trending-list {
+            list-style: none;
+        }
+
+        .trending-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .trending-content a {
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .trending-content a:hover {
+            color: var(--primary);
+        }
+
+        .trending-meta {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .weather-widget {
+            background: linear-gradient(to right, #1e5799, #207cca);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .weather-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .weather-icon {
+            font-size: 2.5rem;
+            margin-right: 10px;
+        }
+
+        .weather-temp {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .weather-location {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .weather-desc {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .weather-detail {
+            background: rgba(255,255,255,0.15);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .weather-detail i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .newsletter {
+            background: #f0f7ff;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .newsletter p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .newsletter-form input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: #004494;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-about p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                width: 200px;
+            }
+            
+            .main-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .main-menu.show {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-bar-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .main-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-buttons .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .hero-buttons .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container top-bar-content">
+                <div class="date-time">
+                    <span><i class="fas fa-calendar-alt"></i> <span id="current-date">Tuesday, July 8, 2025</span></span>
+                    <span><i class="fas fa-clock"></i> <span id="current-time">10:30 AM</span></span>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container main-header">
+            <div class="logo">
+                <i class="fas fa-newspaper fa-2x" style="color: var(--accent);"></i>
+                <h1>Local<span>News</span></h1>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for news...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="main-menu" id="main-menu">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Politics</a></li>
+                <li><a href="#">Local</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Technology</a></li>
+                <li><a href="#">Entertainment</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Health</a></li>
+                <li><a href="#">Opinion</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Breaking News Ticker -->
+    <div class="breaking-news">
+        <div class="container breaking-news-container">
+            <div class="breaking-label">BREAKING</div>
+            <div class="news-ticker">
+                <div class="ticker-content">
+                    Major infrastructure project approved for downtown area - Local businesses celebrate new development opportunities. 
+                    | City council passes new environmental protection bill. 
+                    | Local high school wins state championship for the first time in 20 years.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Your Trusted Source for Local News & Updates</h2>
+                <p>Stay informed with the latest happenings in your community. Breaking news, in-depth analysis, and stories that matter to you.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn">Read Latest News</a>
+                    <a href="#" class="btn btn-outline">Subscribe Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Left Column - Main News -->
+        <div class="main-news">
+            <!-- Featured News -->
+            <div class="featured-news">
+                <div class="section-title">Featured Story</div>
+                <div class="featured-card">
+                    <div class="featured-img">
+                        <img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Downtown Development">
+                    </div>
+                    <div class="featured-content">
+                        <span class="featured-category">DEVELOPMENT</span>
+                        <h2 class="featured-title">Downtown Revitalization Project Approved by City Council</h2>
+                        <p class="featured-excerpt">After months of deliberation, the city council has approved a $250 million revitalization project for the downtown core. The project promises to create 1,200 new jobs and transform the city center.</p>
+                        <a href="#" class="btn">Read Full Story</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Latest News -->
+            <div class="latest-news">
+                <div class="section-title">Latest News</div>
+                <div class="news-grid">
+                    <!-- News Card 1 -->
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Education News">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">EDUCATION</span>
+                            <h3 class="news-title"><a href="#">New STEM Program Launched in Local Schools</a></h3>
+                            <p>Five local schools will implement a new science and technology curriculum starting next semester...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> 2 hours ago</span>
+                                <span><i class="far fa-comment"></i> 24 comments</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- News Card 2 -->
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Business News">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">BUSINESS</span>
+                            <h3 class="news-title"><a href="#">Local Startup Secures $5M in Funding</a></h3>
+                            <p>Tech innovator Nova Systems has secured significant venture capital to expand operations...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> 4 hours ago</span>
+                                <span><i class="far fa-comment"></i> 18 comments</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- News Card 3 -->
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://images.unsplash.com/photo-1519832979-6fa011b87667?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sports News">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">SPORTS</span>
+                            <h3 class="news-title"><a href="#">City Tigers Win Championship After 15-Year Drought</a></h3>
+                            <p>In a thrilling overtime victory, the City Tigers secured the state championship title...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> 6 hours ago</span>
+                                <span><i class="far fa-comment"></i> 42 comments</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- News Card 4 -->
+                    <div class="news-card">
+                        <div class="news-img">
+                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health News">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-category">HEALTH</span>
+                            <h3 class="news-title"><a href="#">New Community Health Center Opens Doors</a></h3>
+                            <p>Residents of West District now have access to comprehensive healthcare services...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> 8 hours ago</span>
+                                <span><i class="far fa-comment"></i> 15 comments</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Sidebar -->
+        <div class="sidebar">
+            <!-- Trending News -->
+            <div class="trending-news">
+                <h3 class="sidebar-title">Trending Now</h3>
+                <ul class="trending-list">
+                    <li class="trending-item">
+                        <div class="trending-number">1</div>
+                        <div class="trending-content">
+                            <a href="#">Mayor Announces New Transportation Plan to Reduce Traffic</a>
+                            <div class="trending-meta">1.2K views • 245 shares</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">2</div>
+                        <div class="trending-content">
+                            <a href="#">Local Restaurant Wins National Culinary Award</a>
+                            <div class="trending-meta">980 views • 182 shares</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">3</div>
+                        <div class="trending-content">
+                            <a href="#">Historic Building Restoration Completed After 5 Years</a>
+                            <div class="trending-meta">845 views • 156 shares</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">4</div>
+                        <div class="trending-content">
+                            <a href="#">New Park Opens in Northside Neighborhood</a>
+                            <div class="trending-meta">732 views • 128 shares</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">5</div>
+                        <div class="trending-content">
+                            <a href="#">Tech Company Announces 200 New Jobs for Local Graduates</a>
+                            <div class="trending-meta">689 views • 115 shares</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Weather Widget -->
+            <div class="weather-widget">
+                <div class="weather-header">
+                    <div class="weather-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="weather-temp">82°F</div>
+                </div>
+                <div class="weather-location">Springfield, CA</div>
+                <div class="weather-desc">Sunny with clear skies</div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <i class="fas fa-wind"></i>
+                        <div>5 mph</div>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-tint"></i>
+                        <div>42%</div>
+                    </div>
+                    <div class="weather-detail">
+                        <i class="fas fa-sun"></i>
+                        <div>UV: 6</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Newsletter -->
+            <div class="newsletter">
+                <h3 class="newsletter-title">Stay Updated</h3>
+                <p>Subscribe to our newsletter for daily news updates delivered to your inbox</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About LocalNews</h3>
+                    <div class="footer-about">
+                        <p>LocalNews is your trusted source for the latest news, events, and stories that matter in our community. Since 2015, we've been committed to delivering accurate, timely, and relevant local journalism.</p>
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Advertise With Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>News Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Local News</a></li>
+                        <li><a href="#">Politics</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Sports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Main Street, Springfield, CA</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@localnews.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 LocalNews. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for our community
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            const dateString = now.toLocaleDateString('en-US', options);
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            document.getElementById('current-date').textContent = dateString;
+            document.getElementById('current-time').textContent = timeString;
+        }
+        
+        // Initialize and update every minute
+        updateDateTime();
+        setInterval(updateDateTime, 60000);
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mainMenu = document.getElementById('main-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainMenu.classList.toggle('show');
+        });
+        
+        // Newsletter form submission
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = newsletterForm.querySelector('input[type="text"]').value;
+            const email = newsletterForm.querySelector('input[type="email"]').value;
+            
+            if(name && email) {
+                alert(`Thank you ${name}! You've been subscribed to our newsletter.`);
+                newsletterForm.reset();
+            } else {
+                alert('Please fill in both fields.');
+            }
+        });
+        
+        // Weather data simulation
+        function updateWeather() {
+            const weatherIcon = document.querySelector('.weather-icon');
+            const weatherTemp = document.querySelector('.weather-temp');
+            const weatherDesc = document.querySelector('.weather-desc');
+            
+            // Simulate weather data
+            const temps = [78, 82, 75, 80, 77];
+            const conditions = ['Sunny', 'Partly Cloudy', 'Mostly Sunny', 'Clear'];
+            const icons = ['fa-sun', 'fa-cloud-sun', 'fa-cloud'];
+            
+            const randomTemp = temps[Math.floor(Math.random() * temps.length)];
+            const randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            weatherIcon.innerHTML = `<i class="fas ${randomIcon}"></i>`;
+            weatherTemp.textContent = `${randomTemp}°F`;
+            weatherDesc.textContent = randomCondition;
+        }
+        
+        // Initialize weather
+        updateWeather();
+        
+        // Add hover effects to news cards
+        const newsCards = document.querySelectorAll('.news-card');
+        newsCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 3px 10px rgba(0,0,0,0.08)';
+            });
+        });
+    </script>
+</body>
+</html>
